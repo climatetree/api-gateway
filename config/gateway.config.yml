@@ -1,0 +1,49 @@
+http:
+  port: 8080
+admin:
+  port: 9876
+  host: localhost
+apiEndpoints:
+  stories:
+    host: localhost
+    paths: 
+      - '/story/1'
+  places:
+    host: localhost
+    paths: 
+      - '/Seattle'
+serviceEndpoints:
+  storiesService:
+    url: 'https://backend-mongo-stories.azurewebsites.net/stories'
+  placesService:
+    url: 'https://places-postgres.azurewebsites.net/api/names'
+policies:
+  - basic-auth
+  - cors
+  - expression
+  - key-auth
+  - log
+  - oauth2
+  - proxy
+  - rate-limit
+pipelines:
+  - name: stories
+    apiEndpoints:
+      - stories
+    policies:
+    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
+    #  - key-auth:
+      - proxy:
+          - action:
+              serviceEndpoint: storiesService 
+              changeOrigin: true
+  - name: places
+    apiEndpoints:
+      - places
+    policies:
+    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
+    #  - key-auth:
+      - proxy:
+          - action:
+              serviceEndpoint: placesService 
+              changeOrigin: true
