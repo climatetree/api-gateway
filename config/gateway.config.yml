@@ -7,7 +7,7 @@ apiEndpoints:
   stories:
     host: localhost
     paths: 
-      - '/story/1'
+      - '/story/2'
   places:
     host: localhost
     paths: 
