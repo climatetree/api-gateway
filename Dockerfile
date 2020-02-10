@@ -13,4 +13,4 @@ COPY . .
 
 EXPOSE 8080 9876
 
-CMD ["node", "-e", "require('express-gateway')().run();"]
+CMD ["npm", "start"]
