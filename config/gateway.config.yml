@@ -5,11 +5,11 @@ admin:
   host: localhost
 apiEndpoints:
   stories:
-    host: localhost
+    host: 'https://climatetreeapigateway.azurewebsites.net'
     paths: 
-      - '/story/2'
+      - '/story/1'
   places:
-    host: localhost
+    host: 'https://climatetreeapigateway.azurewebsites.net'
     paths: 
       - '/Seattle'
 serviceEndpoints:
