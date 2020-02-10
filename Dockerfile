@@ -1,4 +1,4 @@
-FROM node:10
+FROM express-gateway
 
 # Create app directory
 WORKDIR /app
@@ -6,7 +6,7 @@ WORKDIR /app
 # Install app dependencies
 COPY package*.json ./
 
-RUN npm install
+ENV LOG_LEVEL=debug
 
 # Bundle app source
 COPY . .
