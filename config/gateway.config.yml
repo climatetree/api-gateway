@@ -7,11 +7,11 @@ apiEndpoints:
   stories:
     host: '*'
     paths: 
-      - '/story/1'
+      - '/story/:storyId'
   places:
     host: '*'
     paths: 
-      - '/Seattle'
+      - '/:placeName'
 serviceEndpoints:
   storiesService:
     url: 'https://backend-mongo-stories.azurewebsites.net/stories'
