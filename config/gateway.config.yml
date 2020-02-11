@@ -5,11 +5,11 @@ admin:
   host: localhost
 apiEndpoints:
   stories:
-    host: 'https://climatetreeapigateway.azurewebsites.net'
+    host: '*'
     paths: 
       - '/story/:storyId'
   places:
-    host: 'https://climatetreeapigateway.azurewebsites.net'
+    host: '*'
     paths: 
       - '/:placename'
 serviceEndpoints:
@@ -37,6 +37,9 @@ pipelines:
           - action:
               serviceEndpoint: storiesService 
               changeOrigin: true
+      - log: # policy name
+        - action:    # array of condition/actions objects
+            message: ${req.method} ${req.originalUrl} # parameter for log action
   - name: places
     apiEndpoints:
       - places
@@ -47,3 +50,7 @@ pipelines:
           - action:
               serviceEndpoint: placesService 
               changeOrigin: true
+      - log: # policy name
+          - action:    # array of condition/actions objects
+              message: ${req.method} ${req.originalUrl} # parameter for log action
+
