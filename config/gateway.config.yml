@@ -7,11 +7,11 @@ apiEndpoints:
   stories:
     host: 'https://climatetreeapigateway.azurewebsites.net'
     paths: 
-      - '/story/1'
+      - '/story/:storyId'
   places:
     host: 'https://climatetreeapigateway.azurewebsites.net'
     paths: 
-      - '/Seattle'
+      - '/:placename'
 serviceEndpoints:
   storiesService:
     url: 'https://backend-mongo-stories.azurewebsites.net/stories'
