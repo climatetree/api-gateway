@@ -1,21 +1,16 @@
-FROM node:10-alpine
+FROM express-gateway
 
-LABEL maintainer Vincenzo Chianese, vincenzo@express-gateway.io
+# Create app directory
+WORKDIR /app
 
-ARG EG_VERSION=<%= egVersion %>
+# Install app dependencies
+COPY package*.json ./
 
-RUN yarn global add express-gateway@$EG_VERSION && yarn cache clean
+ENV LOG_LEVEL=debug
 
-ENV NODE_ENV production
-ENV NODE_PATH /usr/local/share/.config/yarn/global/node_modules/
-ENV EG_CONFIG_DIR /var/lib/eg
-
-ENV CHOKIDAR_USEPOLLING true
-
-VOLUME /var/lib/eg
+# Bundle app source
+COPY . .
 
 EXPOSE 8080 9876
 
-COPY docker-entrypoint.sh /usr/local/bin/
-ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["node", "-e", "require('express-gateway')().run();"]
+CMD ["npm", "start"]
