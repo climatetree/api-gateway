@@ -8,10 +8,12 @@ apiEndpoints:
     host: '*'
     paths: 
       - '/story/:storyId'
+    methods: ["PUT", "POST", "PATCH", "DELETE", "GET"]
   places:
     host: '*'
     paths: 
       - '/:placeName'
+    methods: ["PUT", "POST", "PATCH", "DELETE", "GET"]
 serviceEndpoints:
   storiesService:
     url: 'https://backend-mongo-stories.azurewebsites.net/stories'
