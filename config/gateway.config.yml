@@ -6,17 +6,23 @@ admin:
 apiEndpoints:
   stories:
     host: '*'
-    paths: 
-      - '/story/:storyId'
+    paths: ['/place/:placeId', '/title/:keyword']
+  storiesVerified:
+    host: '*'
+    paths: ['/story/comment','/create','/:storyID/like/:userID', '/:storyID/unlike/:userID']
   places:
     host: '*'
-    paths: 
-      - '/:placeName'
+    paths: ['/:placeName', '/:placeId/similar', '/:placeId/similar/advanced']
+  users:
+    host: '*'
+    paths: ['/register']
 serviceEndpoints:
   storiesService:
     url: 'https://backend-mongo-stories.azurewebsites.net/stories'
   placesService:
-    url: 'https://places-postgres.azurewebsites.net/api/names'
+    url: 'https://places-postgres.azurewebsites.net/api/places'
+  userService:
+    url: 'https://users.azurewebsites.net/api' 
 policies:
   - basic-auth
   - cors
@@ -26,31 +32,53 @@ policies:
   - oauth2
   - proxy
   - rate-limit
+  - jwt
 pipelines:
-  - name: stories
+  - name: storiesVerified
     apiEndpoints:
-      - stories
+      - storiesVerified
     policies:
-    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
-    #  - key-auth:
+      - jwt:
+          - action:
+              checkCredentialExistence: false
+              secretOrPublicKey: ${ASD_KEY}
       - proxy:
           - action:
               serviceEndpoint: storiesService 
               changeOrigin: true
       - log: # policy name
         - action:    # array of condition/actions objects
-            message: ${req.method} ${req.originalUrl} # parameter for log action
+            message: ${req.method} ${req.originalUrl} 
+  - name: stories
+    apiEndpoints:
+      - stories
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: storiesService 
+              changeOrigin: true
+      - log: # policy name
+        - action:    # array of condition/actions objects
+            message: ${req.method} ${req.originalUrl}          
   - name: places
     apiEndpoints:
       - places
     policies:
-    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
-    #  - key-auth:
       - proxy:
           - action:
               serviceEndpoint: placesService 
               changeOrigin: true
       - log: # policy name
           - action:    # array of condition/actions objects
-              message: ${req.method} ${req.originalUrl} # parameter for log action
-
+              message: ${req.method} ${req.originalUrl} 
+  - name: users
+    apiEndpoints:
+      - users
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: userService 
+              changeOrigin: true
+      - log: # policy name
+        - action:    # array of condition/actions objects
+            message: ${req.method} ${req.originalUrl} 
