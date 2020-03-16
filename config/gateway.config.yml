@@ -18,7 +18,9 @@ apiEndpoints:
     paths: ['/register']
 serviceEndpoints:
   storiesService:
-    url: 'https://backend-mongo-stories.azurewebsites.net/stories'
+    url: 'http://localhost:3000/stories'
+  storiesVerifiedService:
+    url: 'http://localhost:3000/stories'
   placesService:
     url: 'https://places-postgres.azurewebsites.net/api/places'
   userService:
@@ -44,7 +46,7 @@ pipelines:
               secretOrPublicKey: ${ASD_KEY}
       - proxy:
           - action:
-              serviceEndpoint: storiesService 
+              serviceEndpoint: storiesVerifiedService 
               changeOrigin: true
       - log: # policy name
         - action:    # array of condition/actions objects
