@@ -6,25 +6,25 @@ admin:
 apiEndpoints:
   stories:
     host: '*'
-    paths: ['/place/:placeId', '/title/:keyword']
+    paths: ['/stories/place/:placeId', '/stories/title/:keyword']
   storiesVerified:
     host: '*'
-    paths: ['/story/comment','/create','/:storyID/like/:userID', '/:storyID/unlike/:userID']
+    paths: ['/stories/story/comment','/stories/create','/stories/:storyID/like/:userID', '/stories/:storyID/unlike/:userID']
   places:
     host: '*'
-    paths: ['/:placeName', '/:placeId/similar', '/:placeId/similar/advanced']
+    paths: ['/places/:placeName', '/places/:placeId/similar', '/places/:placeId/similar/advanced']
   users:
     host: '*'
-    paths: ['/register']
+    paths: ['/login']
 serviceEndpoints:
   storiesService:
-    url: 'http://localhost:3000/stories'
+    url: 'https://backend-mongo-stories.azurewebsites.net'
   storiesVerifiedService:
-    url: 'http://localhost:3000/stories'
+    url: 'https://backend-mongo-stories.azurewebsites.net'
   placesService:
-    url: 'https://places-postgres.azurewebsites.net/api/places'
+    url: 'https://places-postgres2.azurewebsites.net/api'
   userService:
-    url: 'https://users.azurewebsites.net/api' 
+    url: 'https://user-microservice-demo.herokuapp.com'
 policies:
   - basic-auth
   - cors
@@ -77,10 +77,15 @@ pipelines:
     apiEndpoints:
       - users
     policies:
+      #- cors:
+      #    - action:
+      #        origin: '*'
+      #        methods: 'HEAD,PUT,PATCH,POST,DELETE'
+      #        allowedHeaders: 'application/json'
       - proxy:
           - action:
               serviceEndpoint: userService 
               changeOrigin: true
       - log: # policy name
         - action:    # array of condition/actions objects
-            message: ${req.method} ${req.originalUrl} 
+            message: ${req.method} ${req.originalUrl}
