@@ -6,9 +6,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "dependencies": {
-    "express-gateway": "^1.16.10"
-  },
-  "devDependencies": {
+    "express-gateway": "^1.16.10",
     "dotenv": "^8.2.0"
   }
 }
