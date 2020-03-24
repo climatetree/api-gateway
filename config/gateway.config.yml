@@ -15,7 +15,7 @@ apiEndpoints:
     paths: ['/places/:placeName', '/places/:placeId/similar', '/places/:placeId/similar/advanced']
   users:
     host: '*'
-    paths: ['/login']
+    paths: ['/user/login']
 serviceEndpoints:
   storiesService:
     url: 'https://backend-mongo-stories.azurewebsites.net'
@@ -24,7 +24,7 @@ serviceEndpoints:
   placesService:
     url: 'https://places-postgres2.azurewebsites.net/api'
   userService:
-    url: 'https://user-microservice-demo.herokuapp.com'
+    url: 'https://usermicroservice-climatetree.azurewebsites.net'
 policies:
   - basic-auth
   - cors
@@ -40,6 +40,10 @@ pipelines:
     apiEndpoints:
       - storiesVerified
     policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'HEAD,PUT,PATCH,POST,DELETE'
       - jwt:
           - action:
               checkCredentialExistence: false
@@ -55,6 +59,10 @@ pipelines:
     apiEndpoints:
       - stories
     policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'HEAD,PUT,PATCH,POST,DELETE'
       - proxy:
           - action:
               serviceEndpoint: storiesService 
@@ -66,6 +74,10 @@ pipelines:
     apiEndpoints:
       - places
     policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'HEAD,PUT,PATCH,POST,DELETE'
       - proxy:
           - action:
               serviceEndpoint: placesService 
@@ -77,11 +89,10 @@ pipelines:
     apiEndpoints:
       - users
     policies:
-      #- cors:
-      #    - action:
-      #        origin: '*'
-      #        methods: 'HEAD,PUT,PATCH,POST,DELETE'
-      #        allowedHeaders: 'application/json'
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'HEAD,PUT,PATCH,POST,DELETE'
       - proxy:
           - action:
               serviceEndpoint: userService 
