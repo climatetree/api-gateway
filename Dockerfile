@@ -8,6 +8,8 @@ COPY package*.json ./
 
 ENV LOG_LEVEL=debug
 
+RUN npm install
+
 # Bundle app source
 COPY . .
 
