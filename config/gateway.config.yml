@@ -6,17 +6,25 @@ admin:
 apiEndpoints:
   stories:
     host: '*'
-    paths: 
-      - '/story/:storyId'
+    paths: ['/stories/place/:placeId', '/stories/title/:keyword']
+  storiesVerified:
+    host: '*'
+    paths: ['/stories/story/comment','/stories/create','/stories/:storyID/like/:userID', '/stories/:storyID/unlike/:userID']
   places:
     host: '*'
-    paths: 
-      - '/:placeName'
+    paths: ['/places/:placeName', '/places/:placeId/similar', '/places/:placeId/similar/advanced']
+  users:
+    host: '*'
+    paths: ['/user/login']
 serviceEndpoints:
   storiesService:
-    url: 'https://backend-mongo-stories.azurewebsites.net/stories'
+    url: 'https://backend-mongo-stories.azurewebsites.net'
+  storiesVerifiedService:
+    url: 'https://backend-mongo-stories.azurewebsites.net'
   placesService:
-    url: 'https://places-postgres.azurewebsites.net/api/names'
+    url: 'https://places-postgres2.azurewebsites.net/api'
+  userService:
+    url: 'https://usermicroservice-climatetree.azurewebsites.net'
 policies:
   - basic-auth
   - cors
@@ -26,31 +34,69 @@ policies:
   - oauth2
   - proxy
   - rate-limit
+  - jwt
 pipelines:
+  - name: storiesVerified
+    apiEndpoints:
+      - storiesVerified
+    policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'HEAD,PUT,PATCH,POST,DELETE'
+      - jwt:
+          - action:
+              checkCredentialExistence: false
+              secretOrPublicKey: ${ASD_KEY}
+      - proxy:
+          - action:
+              serviceEndpoint: storiesVerifiedService 
+              changeOrigin: true
+      - log: # policy name
+        - action:    # array of condition/actions objects
+            message: ${req.method} ${req.originalUrl} 
   - name: stories
     apiEndpoints:
       - stories
     policies:
-    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
-    #  - key-auth:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'HEAD,PUT,PATCH,POST,DELETE'
       - proxy:
           - action:
               serviceEndpoint: storiesService 
               changeOrigin: true
       - log: # policy name
         - action:    # array of condition/actions objects
-            message: ${req.method} ${req.originalUrl} # parameter for log action
+            message: ${req.method} ${req.originalUrl}          
   - name: places
     apiEndpoints:
       - places
     policies:
-    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
-    #  - key-auth:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'HEAD,PUT,PATCH,POST,DELETE'
       - proxy:
           - action:
               serviceEndpoint: placesService 
               changeOrigin: true
       - log: # policy name
           - action:    # array of condition/actions objects
-              message: ${req.method} ${req.originalUrl} # parameter for log action
-
+              message: ${req.method} ${req.originalUrl} 
+  - name: users
+    apiEndpoints:
+      - users
+    policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'HEAD,PUT,PATCH,POST,DELETE'
+      - proxy:
+          - action:
+              serviceEndpoint: userService 
+              changeOrigin: true
+      - log: # policy name
+        - action:    # array of condition/actions objects
+            message: ${req.method} ${req.originalUrl}

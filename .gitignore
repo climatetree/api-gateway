@@ -15,6 +15,7 @@ target/
 .mvn
 .DS_Store
 .idea
+.env
 
 ### IntelliJ IDEA ###
 .idea
