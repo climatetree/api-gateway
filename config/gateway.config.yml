@@ -16,6 +16,9 @@ apiEndpoints:
   users:
     host: '*'
     paths: ['/user/login']
+  geoserver:
+    host: '*'
+    paths: ['/geoserver/wfs']
 serviceEndpoints:
   storiesService:
     url: 'https://backend-mongo-stories.azurewebsites.net'
@@ -25,6 +28,8 @@ serviceEndpoints:
     url: 'https://places-postgres2.azurewebsites.net/api'
   userService:
     url: 'https://usermicroservice-climatetree.azurewebsites.net'
+  geoserverService:
+    url: 'https://climatetree-geoserver.azurewebsites.net'
 policies:
   - basic-auth
   - cors
@@ -96,6 +101,21 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: userService 
+              changeOrigin: true
+      - log: # policy name
+        - action:    # array of condition/actions objects
+            message: ${req.method} ${req.originalUrl}
+  - name: geoserver
+    apiEndpoints:
+      - geoserver
+    policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'HEAD,PUT,PATCH,POST,DELETE'
+      - proxy:
+          - action:
+              serviceEndpoint: geoserverService 
               changeOrigin: true
       - log: # policy name
         - action:    # array of condition/actions objects
