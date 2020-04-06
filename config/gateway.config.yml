@@ -6,7 +6,7 @@ admin:
 apiEndpoints:
   stories:
     host: '*'
-    paths: ['/stories/place/:placeId', '/stories/title/:keyword']
+    paths: ['/stories/place/:placeId', '/stories/title/:keyword', 'stories/topStories/:numberOfStories']
   storiesVerified:
     host: '*'
     paths: ['/stories/story/comment','/stories/create','/stories/:storyID/like/:userID', '/stories/:storyID/unlike/:userID']
