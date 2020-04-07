@@ -16,6 +16,9 @@ apiEndpoints:
   users:
     host: '*'
     paths: ['/user/login']
+  usersVerified:
+    host: '*'
+    paths: ['/user/searchname','/user/:userId','/user/:userId/:roleId','/user/blacklist/:userId','/user/unblacklist/:userId','/user/request_role_change/:userId/:roleChangeId', '/user/get_all_role_update_requests']
   geoserver:
     host: '*'
     paths: ['/geoserver/wfs']
@@ -27,6 +30,8 @@ serviceEndpoints:
   placesService:
     url: 'https://places-postgres2.azurewebsites.net/api'
   userService:
+    url: 'https://usermicroservice-climatetree.azurewebsites.net'
+  userVerifiedService:
     url: 'https://usermicroservice-climatetree.azurewebsites.net'
   geoserverService:
     url: 'https://climatetree-geoserver.azurewebsites.net'
@@ -101,6 +106,25 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: userService 
+              changeOrigin: true
+      - log: # policy name
+        - action:    # array of condition/actions objects
+            message: ${req.method} ${req.originalUrl}
+  - name: usersVerified
+    apiEndpoints:
+      - usersVerified
+    policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'HEAD,PUT,PATCH,POST,DELETE'
+      - jwt:
+          - action:
+              checkCredentialExistence: false
+              secretOrPublicKey: ${ASD_KEY}        
+      - proxy:
+          - action:
+              serviceEndpoint: userVerifiedService 
               changeOrigin: true
       - log: # policy name
         - action:    # array of condition/actions objects
