@@ -6,10 +6,28 @@ admin:
 apiEndpoints:
   stories:
     host: '*'
-    paths: ['/stories/place/:placeId', '/stories/title/:keyword', 'stories/topStories/:numberOfStories']
+    paths: ['/stories/place/:placeId',
+    '/stories/title/:keyword',
+    '/stories/topStories/:numberOfStories',
+    '/stories',
+    '/stories/all/strategy',
+    '/stories/all/solution',
+    '/stories/all/sector',
+    '/stories/getPreview',
+    '/stories/sector/:sector',
+    '/stories/solution/:solution',
+    '/stories/strategy/:strategy']
   storiesVerified:
     host: '*'
-    paths: ['/stories/story/comment','/stories/create','/stories/:storyID/like/:userID', '/stories/:storyID/unlike/:userID']
+    paths: ['/stories/story/comment',
+    '/stories/create',
+    '/stories/:storyID/like/:userID', 
+    '/stories/:storyID/unlike/:userID',
+    '/stories/unrated',
+    '/stories/description/:description',
+    '/stories/:storyID/flag/:userID',
+    '/stories/:storyID/unflag/:userID',
+    '/stories/rating/update']
   places:
     host: '*'
     paths: ['/places/:placeName', '/places/:placeId/similar', '/places/:placeId/similar/advanced']
@@ -18,7 +36,13 @@ apiEndpoints:
     paths: ['/user/login']
   usersVerified:
     host: '*'
-    paths: ['/user/searchname','/user/:userId','/user/:userId/:roleId','/user/blacklist/:userId','/user/unblacklist/:userId','/user/request_role_change/:userId/:roleChangeId', '/user/get_all_role_update_requests']
+    paths: ['/user/searchname',
+    '/user/:userId',
+    '/user/:userId/:roleId',
+    '/user/blacklist/:userId',
+    '/user/unblacklist/:userId',
+    '/user/request_role_change/:userId/:roleChangeId', 
+    '/user/get_all_role_update_requests']
   geoserver:
     host: '*'
     paths: ['/geoserver/wfs']
