@@ -20,6 +20,7 @@ apiEndpoints:
   storiesVerified:
     host: '*'
     paths: ['/stories/story/comment',
+    '/stories/delete/:storyId',
     '/stories/create',
     '/stories/:storyID/like/:userID', 
     '/stories/:storyID/unlike/:userID',
