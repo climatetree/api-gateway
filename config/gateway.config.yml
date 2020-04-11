@@ -32,7 +32,7 @@ apiEndpoints:
     '/stories/rating/update']
   places:
     host: '*'
-    paths: ['/places/v1/:placeName', '/places/v1/:placeId/similar', '/places/v1/:placeId/similar/advanced','/places/v1/nearest']
+    paths: ['/places/:placeName', '/places/:placeId/similar', '/places/:placeId/similar/advanced','/places/nearest']
   users:
     host: '*'
     paths: ['/user/login']
@@ -54,7 +54,7 @@ serviceEndpoints:
   storiesVerifiedService:
     url: 'https://backend-mongo-stories.azurewebsites.net/v1'
   placesService:
-    url: 'https://places-postgres2.azurewebsites.net/api'
+    url: 'https://places-postgres2.azurewebsites.net/api/v1'
   userService:
     url: 'https://usermicroservice-climatetree.azurewebsites.net/v1'
   userVerifiedService:
