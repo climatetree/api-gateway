@@ -38,7 +38,9 @@ apiEndpoints:
     paths: ['/user/login']
   usersVerified:
     host: '*'
-    paths: ['/user/searchname',
+    paths: ['/user/searchname/:searchname',
+    '/user/searchrole/:roleId',
+    '/user/searchemail/:emailId',
     '/user/:userId',
     '/user/:userId/:roleId',
     '/user/blacklist/:userId',
