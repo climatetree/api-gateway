@@ -6,30 +6,30 @@ admin:
 apiEndpoints:
   stories:
     host: '*'
-    paths: ['/v1/stories/place/:placeId',
-    '/v1/stories/title/:keyword',
-    '/v1/stories/topStories/:numberOfStories',
-    '/v1/stories',
-    '/v1/stories/taxonomy',
-    '/v1/stories/taxonomy/solution/:solution',
-    '/v1/stories/taxonomy/strategy/:strategy',
-    '/v1/stories/taxonomy/sector/:sector',
-    '/v1/stories/getPreview',
-    '/v1/stories/sector/:sector',
-    '/v1/stories/solution/:solution',
-    '/v1/stories/strategy/:strategy']
+    paths: ['/stories/place/:placeId',
+    '/stories/title/:keyword',
+    '/stories/topStories/:numberOfStories',
+    '/stories',
+    '/stories/taxonomy',
+    '/stories/taxonomy/solution/:solution',
+    '/stories/taxonomy/strategy/:strategy',
+    '/stories/taxonomy/sector/:sector',
+    '/stories/getPreview',
+    '/stories/sector/:sector',
+    '/stories/solution/:solution',
+    '/stories/strategy/:strategy']
   storiesVerified:
     host: '*'
-    paths: ['/v1/stories/story/comment',
-    '/v1/stories/delete/:storyId',
-    '/v1/stories/create',
-    '/v1/stories/:storyID/like/:userID', 
-    '/v1/stories/:storyID/unlike/:userID',
-    '/v1/stories/unrated',
-    '/v1/stories/description/:description',
-    '/v1/stories/:storyID/flag/:userID',
-    '/v1/stories/:storyID/unflag/:userID',
-    '/v1/stories/rating/update']
+    paths: ['/stories/story/comment',
+    '/stories/delete/:storyId',
+    '/stories/create',
+    '/stories/:storyID/like/:userID', 
+    '/stories/:storyID/unlike/:userID',
+    '/stories/unrated',
+    '/stories/description/:description',
+    '/stories/:storyID/flag/:userID',
+    '/stories/:storyID/unflag/:userID',
+    '/stories/rating/update']
   places:
     host: '*'
     paths: ['/places/v1/:placeName', '/places/v1/:placeId/similar', '/places/v1/:placeId/similar/advanced','/places/v1/nearest']
@@ -50,15 +50,15 @@ apiEndpoints:
     paths: ['/geoserver/wfs']
 serviceEndpoints:
   storiesService:
-    url: 'https://backend-mongo-stories.azurewebsites.net'
+    url: 'https://backend-mongo-stories.azurewebsites.net/v1'
   storiesVerifiedService:
-    url: 'https://backend-mongo-stories.azurewebsites.net'
+    url: 'https://backend-mongo-stories.azurewebsites.net/v1'
   placesService:
     url: 'https://places-postgres2.azurewebsites.net/api'
   userService:
-    url: 'https://usermicroservice-climatetree.azurewebsites.net'
+    url: 'https://usermicroservice-climatetree.azurewebsites.net/v1'
   userVerifiedService:
-    url: 'https://usermicroservice-climatetree.azurewebsites.net'
+    url: 'https://usermicroservice-climatetree.azurewebsites.net/v1'
   geoserverService:
     url: 'https://climatetree-geoserver.azurewebsites.net'
 policies:
