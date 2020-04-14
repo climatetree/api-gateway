@@ -15,9 +15,10 @@ apiEndpoints:
     '/stories/taxonomy/strategy/:strategy',
     '/stories/taxonomy/sector/:sector',
     '/stories/getPreview',
-    '/stories/sector/:sector',
+    '/stories/sector/:sector',    
     '/stories/solution/:solution',
-    '/stories/strategy/:strategy']
+    '/stories/strategy/:strategy',
+    '/stories/mediaTypes']
   storiesVerified:
     host: '*'
     paths: ['/stories/story/comment',
@@ -29,7 +30,10 @@ apiEndpoints:
     '/stories/description/:description',
     '/stories/:storyID/flag/:userID',
     '/stories/:storyID/unflag/:userID',
-    '/stories/rating/update']
+    '/stories/rating/update',
+    '/stories/flagged/sorted/:numberOfStories',
+    '/stories/user/:userID',
+    '/stories/search']
   places:
     host: '*'
     paths: ['/places/:placeName', '/places/:placeId/similar', '/places/:placeId/similar/advanced','/places/nearest']
