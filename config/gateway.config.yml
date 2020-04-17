@@ -18,7 +18,8 @@ apiEndpoints:
     '/stories/sector/:sector',    
     '/stories/solution/:solution',
     '/stories/strategy/:strategy',
-    '/stories/mediaTypes']
+    '/stories/mediaTypes',
+    '/stories/search']
   storiesVerified:
     host: '*'
     paths: ['/stories/story/comment',
@@ -33,7 +34,7 @@ apiEndpoints:
     '/stories/rating/update',
     '/stories/flagged/sorted/:numberOfStories',
     '/stories/user/:userID',
-    '/stories/search']
+    '/stories/update/:storyId']
   places:
     host: '*'
     paths: ['/places/:placeName', '/places/:placeId/similar', '/places/:placeId/similar/advanced','/places/nearest']
