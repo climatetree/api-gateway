@@ -87,7 +87,7 @@ pipelines:
     policies:
       - cors:
           - action:
-              origin: '*'
+              origin: 'https://www.climatetree.wiki'
               methods: 'HEAD,PUT,PATCH,POST,DELETE'
       - jwt:
           - action:
@@ -106,7 +106,7 @@ pipelines:
     policies:
       - cors:
           - action:
-              origin: '*'
+              origin: 'https://www.climatetree.wiki'
               methods: 'HEAD,PUT,PATCH,POST,DELETE'
       - proxy:
           - action:
@@ -121,7 +121,7 @@ pipelines:
     policies:
       - cors:
           - action:
-              origin: '*'
+              origin: 'https://www.climatetree.wiki'
               methods: 'HEAD,PUT,PATCH,POST,DELETE'
       - proxy:
           - action:
@@ -136,7 +136,7 @@ pipelines:
     policies:
       - cors:
           - action:
-              origin: '*'
+              origin: 'https://www.climatetree.wiki'
               methods: 'HEAD,PUT,PATCH,POST,DELETE'
       - proxy:
           - action:
@@ -151,7 +151,7 @@ pipelines:
     policies:
       - cors:
           - action:
-              origin: '*'
+              origin: 'https://www.climatetree.wiki'
               methods: 'HEAD,PUT,PATCH,POST,DELETE'
       - jwt:
           - action:
@@ -170,7 +170,7 @@ pipelines:
     policies:
       - cors:
           - action:
-              origin: '*'
+              origin: 'https://www.climatetree.wiki'
               methods: 'HEAD,PUT,PATCH,POST,DELETE'
       - proxy:
           - action:
