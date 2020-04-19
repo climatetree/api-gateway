@@ -19,7 +19,9 @@ apiEndpoints:
     '/stories/solution/:solution',
     '/stories/strategy/:strategy',
     '/stories/mediaTypes',
-    '/stories/search']
+    '/stories/search',
+    '/stories/taxonomy/all/solution',
+    '/stories/taxonomy/all/sector']
   storiesVerified:
     host: '*'
     paths: ['/stories/story/comment',
